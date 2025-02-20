@@ -288,30 +288,18 @@ const app = {
         this.loadCurrentSong();
     },
     start: function () {
-        // Gán cấu hình từ config vào ứng dụng
-        // Assign configuration from config to application
         this.loadConfig();
-
-        // Định nghĩa các thuộc tính cho object
-        // Defines properties for the object
         this.defineProperties();
-
-        // Lắng nghe / xử lý các sự kiện (DOM events)
-        // Listening / handling events (DOM events)
         this.handleEvents();
-
-        // Tải thông tin bài hát đầu tiên vào UI khi chạy ứng dụng
-        // Load the first song information into the UI when running the app
         this.loadCurrentSong();
-
-        // Render playlist
         this.render();
-
-        // Hiển thị trạng thái ban đầu của button repeat & random
-        // Display the initial state of the repeat & random button
         randomBtn.classList.toggle("active", this.isRandom);
         repeatBtn.classList.toggle("active", this.isRepeat);
-    }
+    
+        audio.play().catch(() => {
+            console.warn("Trình duyệt chặn autoplay, cần tương tác từ người dùng.");
+        });
+    }    
 };
 
 app.start();
